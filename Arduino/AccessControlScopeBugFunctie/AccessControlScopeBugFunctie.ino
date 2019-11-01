@@ -190,11 +190,6 @@ void setup() {
     for ( uint8_t j = 0; j < 4; j++ ) {        // Loop 4 times
       EEPROM.write( 2 + j, readCard[j] );  // Write scanned PICC's UID to EEPROM, start from address 3
     }
-
-    //WRITE HOURS
-    for ( uint8_t j = 0; j < 4; j++ ) {        // Loop 4 times
-      EEPROM.write( 6 + j, hours[j] );  // Write scanned PICC's UID to EEPROM, start from address 7
-    }
     EEPROM.write(1, 143);                  // Write to EEPROM we defined Master Card.
     Serial.println(F("Master Card Defined"));
   }
@@ -404,8 +399,9 @@ void writeID( byte a[] ) {
     EEPROM.write( 0, num );     // Write the new count to the counter
     for ( uint8_t j = 0; j < 4; j++ ) {   // Loop 4 times
       EEPROM.write( start + j, a[j] );  // Write the array values to EEPROM in the right position
-      EEPROM.write( start + j + 4, hours[j]); //write standard hours to EEPROM in the right position
+      EEPROM.write( start + j + 4, hours[j]); //Wrote hpirs 
     }
+    
     
     successWrite();
     Serial.println(F("Succesfully added ID record to EEPROM"));
@@ -425,7 +421,7 @@ void deleteID( byte a[] ) {
   else {
     uint8_t num = EEPROM.read(0);   // Get the numer of used spaces, position 0 stores the number of ID cards
     uint8_t slot;       // Figure out the slot number of the card
-    uint8_t start;      // = ( num * 8 ) + 6; // Figure out where the next slot starts
+    uint8_t start;      // = ( num * 4 ) + 6; // Figure out where the next slot starts
     uint8_t looping;    // The number of times the loop repeats
     uint8_t j;
     uint8_t count = EEPROM.read(0); // Read the first Byte of EEPROM that stores number of cards
@@ -447,6 +443,7 @@ void deleteID( byte a[] ) {
 
 ///////////////////////////////////////// Check Bytes   ///////////////////////////////////
 bool checkTwo ( byte a[], byte b[] ) {
+  for ( uint8_t k = 0; k < 4; k++ ) {   // Loop 4 times
     if ( a[k] != b[k] ) {     // IF a != b then false, because: one fails, all fail
       return false;
     }
