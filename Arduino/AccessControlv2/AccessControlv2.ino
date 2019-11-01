@@ -152,7 +152,7 @@ void setup() {
       Serial.println(F("EEPROM Successfully Wiped"));
       digitalWrite(redLed, LED_OFF);  // visualize a successful wipe
       delay(200);
-      digitalWrite(redLed, LED_ON);EEPROM.read
+      digitalWrite(redLed, LED_ON);
       delay(200);
       digitalWrite(redLed, LED_OFF);
       delay(200);
@@ -312,7 +312,7 @@ uint8_t getID() {
   // I think we should assume every PICC as they have 4 byte UID
   // Until we support 7 byte PICCs
   Serial.println(F("Scanned PICC's UID:"));
-  for ( uint8_t i = 0; i < 4; i++) {  //
+  for (    i = 0; i < 4; i++) {  //
     readCard[i] = mfrc522.uid.uidByte[i];
     Serial.print(readCard[i], HEX);
   }

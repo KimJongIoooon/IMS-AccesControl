@@ -30,6 +30,7 @@
         {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.lblConnectionStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -50,16 +51,28 @@
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
             // 
+            // lblConnectionStatus
+            // 
+            this.lblConnectionStatus.AutoSize = true;
+            this.lblConnectionStatus.Location = new System.Drawing.Point(12, 9);
+            this.lblConnectionStatus.Name = "lblConnectionStatus";
+            this.lblConnectionStatus.Size = new System.Drawing.Size(52, 17);
+            this.lblConnectionStatus.TabIndex = 2;
+            this.lblConnectionStatus.Text = "Status:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblConnectionStatus);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -67,6 +80,7 @@
 
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.Label lblConnectionStatus;
     }
 }
 
