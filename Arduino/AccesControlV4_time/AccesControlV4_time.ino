@@ -63,7 +63,7 @@
 #include <EEPROM.h>     // We are going to read and write PICC's UIDs from/to EEPROM
 #include <SPI.h>        // RC522 Module uses SPI protocol
 #include <MFRC522.h>  // Library for Mifare RC522 Devices
-
+#include <Time.h>
 /*
   Instead of a Relay you may want to use a servo. Servos can lock and unlock door locks too
   Relay will be used by default
@@ -110,8 +110,7 @@ byte hours[4] = {07, 30, 22, 30};
 byte masterCard[4];   // Stores master card's ID read from EEPROM
 String message;
 String messageStarted;
-
-long unixTimeStamp = 1572623231; 
+time_t t  = 1572623231; 
 // Create MFRC522 instance.
 #define SS_PIN 10
 #define RST_PIN 9
@@ -280,7 +279,23 @@ void loop () {
       if ( findID(readCard) ) { // If not, see if the card is in the EEPROM
         Serial.println(F("#Welcome, You shall pass%"));
         Serial.print ("hours:");
-        for (uint8_t i = 0; i < 4; i++) {  //
+        Serial.print("start Time:");
+        for (uint8_t i = 0; i < 2; i++) {  //
+          
+          Serial.print(storedHours[i], DEC);
+        }
+        Serial.print("End Time:");
+        
+        int startHour = storedHours[0];
+        int startMinutes= storedHours[1];; 
+        int endHour= storedHours[2];;
+        int endMinutes= storedHours[3];; 
+s        if(startHour <  hour(t) && startMinutes <  minute(t)){
+          Serial.print("Kom binnen");
+        } else {
+          
+        }
+        for (uint8_t i = 2; i < 4; i++) {  //
           Serial.print(storedHours[i], DEC);
         }
         Serial.println(";");
