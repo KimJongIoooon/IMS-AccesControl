@@ -211,7 +211,9 @@ void setup() {
 
 ///////////////////////////////////////// Main Loop ///////////////////////////////////
 void loop () {
-  do {
+   do {
+    serialCommunicationIn();
+  
     successRead = getID();  // sets successRead to 1 when we get read from reader otherwise 0
     // When device is in use if wipe button pressed for 10 seconds initialize Master Card wiping
     if (digitalRead(wipeB) == LOW) { // Check if button is pressed
@@ -589,6 +591,7 @@ void serialCommunicationIn() {
 }
 
 void executeSerialCommand(String message){
+  Serial.print(message);
   Serial.println("execute command");
 }
 bool monitorWipeButton(uint32_t interval) {

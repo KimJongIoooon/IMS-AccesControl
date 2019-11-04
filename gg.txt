@@ -5,7 +5,7 @@ eindtijd = 2 bytes;
 
 
 EEPROM ADRESSEN
-0 = ??? word denk niet gebruik???
+0 = //nr of cards 
 1 = 143 //Dit is een magisch nummer wat aangeeft dat de Master card is ingesteld.
 2t/m 5 = MastercardID
 6t/m 9 = MastercardUren
