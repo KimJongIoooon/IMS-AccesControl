@@ -1,5 +1,5 @@
 PICC = een rfid card.
-1 rfid-id = 4 bytes;
+1 rfid-id = 4 bytes; AA 20 60 24 / AA206024 
 begintijd = 2 bytes;
 eindtijd = 2 bytes;
 

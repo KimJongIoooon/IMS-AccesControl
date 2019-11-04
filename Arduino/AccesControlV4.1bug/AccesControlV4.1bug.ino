@@ -594,27 +594,36 @@ void executeSerialCommand(String command) {
   Serial.print("executing command: ");
   Serial.println(command);
   if (command.startsWith("ADD_CARD:")) {
-    int indexValueStart = command.indexOf(':') + 1;
-    int indexValueEnd = command.indexOf(',');
-    String value = command.substring(indexValueStart, indexValueEnd);
-    Serial.println("value: " + value
-  };
-  //Convert to char array for function
-  char charArray[8];
-  value.toCharArray(charArray, 255);
-  byte id[4] = {0};
-  hexCharacterStringToBytes(id, charArray);
-  //addCard(id);
-}
+    int indexIDStart = command.indexOf(':') + 1;
+    int indexIDEnd = command.indexOf(',');
+    int indexHoursStart = command.indexOf(',')+1;
+    int indexHoursEnd = command.length();
+    String strHours = command.substring(indexHoursStart, indexHoursEnd); 
+    String strId = command.substring(indexIDStart, indexIDEnd);
+    Serial.println("strId: " + strId);
+    //Convert to char array for function
+    char charArray[8];
+    //Convert id to bytes
+    byte id[4] = {0};
+    strId.toCharArray(charArray, 255);
+    hexCharacterStringToBytes(id, charArray);
+    
+    //Convert hours to bytes
+    byte hours[4] = {0};
+    strHours.toCharArray(charArray, 255);
+    hexCharacterStringToBytes(hours, charArray);
+    
+    addCard(id, hours);
+  }
 }
 
 void addCard(byte id[], byte hours[]) {
-  Serial.print("Adding ID:");
+  Serial.print("Adding ID:"); 
   for ( uint8_t i = 0; i < 4; i++) {  //
     Serial.print(id[i], HEX);
   }
   Serial.println(".");
-  writeID(id, hours);
+    writeID(id, hours);
 
 }
 void hexCharacterStringToBytes(byte *byteArray, const char *hexString)
