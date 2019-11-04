@@ -1,0 +1,20 @@
+PICC = een rfid card.
+1 rfid-id = 4 bytes;
+begintijd = 2 bytes;
+eindtijd = 2 bytes;
+
+
+EEPROM ADRESSEN
+0 = ??? word denk niet gebruik???
+1 = 143 //Dit is een magisch nummer wat aangeeft dat de Master card is ingesteld.
+2t/m 5 = MastercardID
+6t/m 9 = MastercardUren
+
+10 t/m 13 	= pas1 ID 
+14 t/m 17 	= pas1 uren 
+18 t/m  25 	= pas2
+26 t/m  33 	= pas2
+.....
+.....
+.....
+s..... 
