@@ -15,7 +15,7 @@ namespace IMS_AccessControl
         private SerialMessenger serialMessenger;
         private Timer readMessageTimer;
 
-        BindingList<Card> cards = new BindingList<Card>();
+        BindingList<Employee> Employees = new BindingList<Employee>();
         public Form1()
         {
             InitializeComponent();
@@ -27,8 +27,9 @@ namespace IMS_AccessControl
             readMessageTimer.Interval = 10;
             readMessageTimer.Tick += new EventHandler(ReadMessageTimer_Tick);
 
-            //cards.Add(new Card("iain", "12341234", 1000, 1700));
-            listBox1.DataSource = cards;
+            Employees.Add(new Employee("iain", "12341234", 1000, 1700));
+            Employees.Add(new Employee("Stijn", "AA123412", 1000, 1700));
+            listBox1.DataSource = Employees;
         }
 
         private void disconnect()
@@ -87,24 +88,33 @@ namespace IMS_AccessControl
 
         private void BtnAddCard_Click(object sender, EventArgs e)
         {
-            cards.Add(new Card(tbxName.Text, tbxCardID.Text, Convert.ToInt32(nudStartTime.Value), Convert.ToInt32(nudEndTime.Value)));
+            Employees.Add(new Employee(tbxName.Text, tbxCardID.Text, Convert.ToInt32(nudStartTime.Value), Convert.ToInt32(nudEndTime.Value)));
             
         }
 
         private void BtnSync_Click(object sender, EventArgs e)
         {
             lblConnectionStatus.Text = "Status: Syncing";
-            foreach(Card card in cards)
+            foreach(Employee employee in Employees)
             {
-                string deleteMessage = $"#DELETE_CARD:{card.pasId},{card.StartHour}{card.EndHour}%";
+                string deleteMessage = $"#DELETE_CARD:{employee.pasId},{employee.StartHour}{employee.EndHour}%";
                 serialMessenger.SendMessage(deleteMessage);
                 System.Threading.Thread.Sleep(800);
-                string addMessage = $"#ADD_CARD:{card.pasId},{card.StartHour}{card.EndHour}%";
+                string addMessage = $"#ADD_CARD:{employee.pasId},{employee.StartHour}{employee.EndHour}%";
                 serialMessenger.SendMessage(addMessage);
                 System.Threading.Thread.Sleep(800);
 
             }
 
+        }
+
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Employee selectedItem = (Employee)listBox1.SelectedItem;
+            tbxName.Text = selectedItem.name;
+            tbxCardID.Text = selectedItem.pasId;
+            nudEndTime.Value = Convert.ToInt32(selectedItem.EndHour);
+            nudStartTime.Value = Convert.ToInt32(selectedItem.StartHour);
         }
     }
 }

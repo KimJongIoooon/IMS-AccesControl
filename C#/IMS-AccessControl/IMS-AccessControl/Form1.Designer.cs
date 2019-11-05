@@ -41,8 +41,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPas = new System.Windows.Forms.Button();
             this.btnSync = new System.Windows.Forms.Button();
+            this.btnDeleteCard = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEndTime)).BeginInit();
             this.SuspendLayout();
@@ -78,10 +81,11 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(383, 74);
+            this.listBox1.Location = new System.Drawing.Point(369, 131);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(539, 292);
+            this.listBox1.Size = new System.Drawing.Size(589, 308);
             this.listBox1.TabIndex = 3;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
             // 
             // tbxName
             // 
@@ -167,14 +171,15 @@
             this.label4.TabIndex = 12;
             this.label4.Text = "eindtijd";
             // 
-            // button1
+            // btnPas
             // 
-            this.button1.Location = new System.Drawing.Point(832, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "addCard";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPas.Location = new System.Drawing.Point(833, 41);
+            this.btnPas.Name = "btnPas";
+            this.btnPas.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnPas.Size = new System.Drawing.Size(125, 23);
+            this.btnPas.TabIndex = 13;
+            this.btnPas.Text = "Pas updaten";
+            this.btnPas.UseVisualStyleBackColor = true;
             // 
             // btnSync
             // 
@@ -186,13 +191,45 @@
             this.btnSync.UseVisualStyleBackColor = true;
             this.btnSync.Click += new System.EventHandler(this.BtnSync_Click);
             // 
+            // btnDeleteCard
+            // 
+            this.btnDeleteCard.Location = new System.Drawing.Point(833, 70);
+            this.btnDeleteCard.Name = "btnDeleteCard";
+            this.btnDeleteCard.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.btnDeleteCard.Size = new System.Drawing.Size(125, 23);
+            this.btnDeleteCard.TabIndex = 15;
+            this.btnDeleteCard.Text = "Pas verwijderen";
+            this.btnDeleteCard.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(474, 63);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(98, 21);
+            this.checkBox1.TabIndex = 16;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(366, 111);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(96, 17);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Medewerkers.";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 450);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.btnDeleteCard);
             this.Controls.Add(this.btnSync);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPas);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -231,8 +268,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPas;
         private System.Windows.Forms.Button btnSync;
+        private System.Windows.Forms.Button btnDeleteCard;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label5;
     }
 }
 
