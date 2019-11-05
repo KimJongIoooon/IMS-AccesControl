@@ -3,6 +3,8 @@ PICC = een rfid card.
 begintijd = 2 bytes;
 eindtijd = 2 bytes;
 
+#ADD_CARD:A288301C,09001700%
+#DELETE_CARD:A288301C,09001700%
 
 EEPROM ADRESSEN
 0 = //nr of cards 

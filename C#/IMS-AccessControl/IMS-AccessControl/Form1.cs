@@ -15,16 +15,20 @@ namespace IMS_AccessControl
         private SerialMessenger serialMessenger;
         private Timer readMessageTimer;
 
+        BindingList<Card> cards = new BindingList<Card>();
         public Form1()
         {
             InitializeComponent();
 
             MessageBuilder messageBuilder = new MessageBuilder('#', '%');
-            serialMessenger = new SerialMessenger("COM5", 9600, messageBuilder);
+            serialMessenger = new SerialMessenger("COM3", 9600, messageBuilder);
 
             readMessageTimer = new Timer();
             readMessageTimer.Interval = 10;
             readMessageTimer.Tick += new EventHandler(ReadMessageTimer_Tick);
+
+            //cards.Add(new Card("iain", "12341234", 1000, 1700));
+            listBox1.DataSource = cards;
         }
 
         private void disconnect()
@@ -67,13 +71,40 @@ namespace IMS_AccessControl
         private void processReceivedMessage(string message)
         {
             richTextBox1.Text += message + Environment.NewLine;
-            
 
+            if (message.StartsWith("Userlogin"))
+            {
+                int indexStart = message.IndexOf(':') +1;
+                string pasNr = message.Substring(indexStart);
+                MessageBox.Show(pasNr);
+            }
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             disconnect();
+        }
+
+        private void BtnAddCard_Click(object sender, EventArgs e)
+        {
+            cards.Add(new Card(tbxName.Text, tbxCardID.Text, Convert.ToInt32(nudStartTime.Value), Convert.ToInt32(nudEndTime.Value)));
+            
+        }
+
+        private void BtnSync_Click(object sender, EventArgs e)
+        {
+            lblConnectionStatus.Text = "Status: Syncing";
+            foreach(Card card in cards)
+            {
+                string deleteMessage = $"#DELETE_CARD:{card.pasId},{card.StartHour}{card.EndHour}%";
+                serialMessenger.SendMessage(deleteMessage);
+                System.Threading.Thread.Sleep(800);
+                string addMessage = $"#ADD_CARD:{card.pasId},{card.StartHour}{card.EndHour}%";
+                serialMessenger.SendMessage(addMessage);
+                System.Threading.Thread.Sleep(800);
+
+            }
+
         }
     }
 }
